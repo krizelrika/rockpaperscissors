@@ -58,16 +58,25 @@ function playGame() {
     playRound(humanChoice, computerChoice);
 }
 
-for(let i=0; i < 5; i++){
-    playGame();
-    if(i == 4) {
-        console.log("Final score is: human " + humanScore + ", computer " + computerScore);
-        if (humanScore > computerScore) {
-            console.log("The human wins!");
-        } else if(humanScore == computerScore){
-            console.log("It's a tie!");
-        } else {
-            console.log("The computer wins!");
-        }
-    }
+function logScore(){
+    const container = document.querySelector("#container");
+    const content = document.createElement("div");
+    content.style.color = "blue";
+
+    // adds several style rules
+    content.style.cssText = "color: blue; background: white;";
+
+    // adds several style rules
+    content.setAttribute("style", "color: blue; background: white;");
+    content.classList.add("content");
+    content.textContent = "Human Score: " + humanScore + "\nComputer Score: " + computerScore;
+
+    container.appendChild(content);
 }
+
+const playButton = document.querySelector("#playRound");
+playButton.addEventListener("click", () => {
+    console.log("Button works! accessing playGame");
+    playGame();
+    logScore();
+});
