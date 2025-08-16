@@ -19,8 +19,34 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
+function setComputerEmoji(computerChoice) {
+    const computerContainer = document.querySelector("#computerChoice");
+
+    if(computerChoice == "rock"){
+        computerContainer.textContent = '🪨';
+    } else if (computerChoice == "paper"){
+        computerContainer.textContent = '📄';
+    } else {
+        computerContainer.textContent = '✂️';
+    }
+}
+
+function setHumanEmoji(humanChoice) {
+    const humanContainer = document.querySelector("#userChoice");
+
+    if(humanChoice == "rock"){
+        humanContainer.textContent = '🪨';
+    } else if (humanChoice == "paper"){
+        humanContainer.textContent = '📄';
+    } else {
+        humanContainer.textContent = '✂️';
+    }
+}
+
 function playRound(humanChoice, computerChoice) {
     let lowerHumanChoice = humanChoice.toLowerCase();
+    setHumanEmoji(lowerHumanChoice);
+    setComputerEmoji(computerChoice);
     if (lowerHumanChoice === computerChoice) {
         console.log("You chose the same: " +lowerHumanChoice+ " It's a draw!");
     } else if ((lowerHumanChoice === "rock")) {
@@ -51,32 +77,25 @@ function playRound(humanChoice, computerChoice) {
 }
 
 
-function playGame() {
+function playGame(humanChoice) {
     const computerChoice = getComputerChoice();
-    const humanChoice = getHumanChoice();
 
     playRound(humanChoice, computerChoice);
+    logScore();
 }
 
 function logScore(){
-    const container = document.querySelector("#container");
-    const content = document.createElement("div");
-    content.style.color = "blue";
+    const computerScoreContainer = document.querySelector("#computerScore");
+    const humanScoreContainer = document.querySelector("#userScore");
 
-    // adds several style rules
-    content.style.cssText = "color: blue; background: white;";
+    humanScoreContainer.textContent = humanScore;
+    computerScoreContainer.textContent = computerScore;
 
-    // adds several style rules
-    content.setAttribute("style", "color: blue; background: white;");
-    content.classList.add("content");
-    content.textContent = "Human Score: " + humanScore + "\nComputer Score: " + computerScore;
-
-    container.appendChild(content);
 }
 
-const playButton = document.querySelector("#playRound");
+/*const playButton = document.querySelector("#playRound");
 playButton.addEventListener("click", () => {
     console.log("Button works! accessing playGame");
     playGame();
     logScore();
-});
+});*/
