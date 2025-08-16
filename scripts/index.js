@@ -26,8 +26,10 @@ function setComputerEmoji(computerChoice) {
         computerContainer.textContent = '🪨';
     } else if (computerChoice == "paper"){
         computerContainer.textContent = '📄';
-    } else {
+    } else if(computerChoice == "scissors") {
         computerContainer.textContent = '✂️';
+    } else {
+        computerContainer.textContent = '❓';
     }
 }
 
@@ -38,8 +40,10 @@ function setHumanEmoji(humanChoice) {
         humanContainer.textContent = '🪨';
     } else if (humanChoice == "paper"){
         humanContainer.textContent = '📄';
-    } else {
+    } else if(humanChoice == "scissors") {
         humanContainer.textContent = '✂️';
+    } else {
+        humanContainer.textContent = '❓';
     }
 }
 
@@ -93,9 +97,11 @@ function logScore(){
 
 }
 
-/*const playButton = document.querySelector("#playRound");
-playButton.addEventListener("click", () => {
-    console.log("Button works! accessing playGame");
-    playGame();
+const resetButton = document.querySelector("#resetButton");
+resetButton.addEventListener("click", () => {
+    humanScore = 0;
+    computerScore = 0;
     logScore();
-});*/
+    setHumanEmoji('');
+    setComputerEmoji('');
+});
