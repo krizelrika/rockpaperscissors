@@ -80,12 +80,36 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+function showGameOver() {
+    const modal = document.getElementById('gameOverModal');
+    const winnerEmoji = document.getElementById('winnerEmoji');
+    const winnerText = document.getElementById('winnerText');
+    const finalScore = document.getElementById('finalScore');
+
+    if (humanScore >= 5) {
+        winnerEmoji.textContent = '🎉';
+        winnerText.textContent = 'You Win!';
+    } else {
+        winnerEmoji.textContent = '😔';
+        winnerText.textContent = 'Computer Wins!';
+    }
+    
+    finalScore.textContent = `Final Score: ${humanScore} - ${computerScore}`;
+    modal.style.display = "block";
+
+}
+
 
 function playGame(humanChoice) {
     const computerChoice = getComputerChoice();
-
     playRound(humanChoice, computerChoice);
     logScore();
+
+    /*check if someone won*/
+    if(humanScore == 5 || computerScore == 5) {
+        showGameOver();
+    }
+
 }
 
 function logScore(){
@@ -97,8 +121,22 @@ function logScore(){
 
 }
 
+
 const resetButton = document.querySelector("#resetButton");
 resetButton.addEventListener("click", () => {
+    const modal = document.getElementById('gameOverModal');
+    modal.style.display = "none";
+    humanScore = 0;
+    computerScore = 0;
+    logScore();
+    setHumanEmoji('');
+    setComputerEmoji('');
+});
+
+const resetGameButton = document.querySelector("#resetGameButton");
+resetGameButton.addEventListener("click", () => {
+    const modal = document.getElementById('gameOverModal');
+    modal.style.display = "none";
     humanScore = 0;
     computerScore = 0;
     logScore();
